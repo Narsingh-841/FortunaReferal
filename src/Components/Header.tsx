@@ -7,7 +7,7 @@ interface HeaderProps {
 
 const Header = ({ onMobileToggle }: HeaderProps) => {
   return (
-    <header className="w-full bg-white shadow-sm flex items-center justify-between px-6 py-3 fixed top-0 left-0 z-50">
+    <header className="w-full bg-white border-b border-gray-200 flex items-center justify-between px-6 py-3 fixed top-0 left-0 z-50">
       {/* Left section - Logo and Mobile Toggle */}
       <div className="flex items-center space-x-4">
         <button

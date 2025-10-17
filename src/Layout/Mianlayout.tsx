@@ -3,6 +3,7 @@ import { Outlet } from "react-router-dom";
 import Header from "../Components/Header";
 import Sidebar from "../Components/Sidebar";
 import { useState } from "react";
+import MainboardHeader from "../Components/MainboardHeader";
 
 const Mainlayout = () => {
   const [isMobileOpen, setIsMobileOpen] = useState(false);
@@ -17,12 +18,12 @@ const Mainlayout = () => {
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-gray-50">
+    <div className="flex flex-col min-h-screen">
       {/* Header - Always at the top */}
       <Header onMobileToggle={handleMobileToggle} />
       
       {/* Main content area with sidebar and content */}
-      <div className="flex flex-1">
+      <div className="flex flex-1 pt-14"> {/* Added pt-16 to account for header height */}
         {/* Sidebar - Below header */}
         <div className="hidden lg:block">
           <Sidebar 
@@ -43,12 +44,18 @@ const Mainlayout = () => {
           />
         </div>
         
-        {/* Main content */}
-        <main className={`flex-1 p-6 overflow-y-auto pt-16 transition-all duration-300 ${
-          isSidebarCollapsed ? 'lg:ml-16' : 'lg:ml-64'
+        {/* Main content area */}
+        <div className={`flex-1 flex flex-col transition-all duration-300 ${
+          isSidebarCollapsed ? 'lg:ml-16' : 'lg:ml-56'
         }`}>
-          <Outlet />
-        </main>
+          {/* MainboardHeader - Below main header but above content */}
+          <MainboardHeader userName="Olivia" />
+          
+          {/* Main content with Outlet */}
+          <main className="flex-1 p-6 overflow-y-auto">
+            <Outlet />
+          </main>
+        </div>
       </div>
     </div>
   );
