@@ -40,7 +40,7 @@ const Sidebar = ({ isCollapsed, onCollapse, isMobileOpen, onMobileToggle }: Side
       {/* Sidebar */}
       <div
         className={`
-          fixed top-14 left-0 h-[calc(100vh-3.5rem)] bg-white shadow-md flex flex-col justify-between z-30
+          fixed top-14 left-0 h-[calc(100vh-3.5rem)] bg-white border-r border-gray-200 flex flex-col justify-between z-30
           transition-all duration-300 ease-in-out
           ${isCollapsed ? "w-16" : "w-56"}
           ${isMobileOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"}
