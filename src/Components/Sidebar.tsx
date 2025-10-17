@@ -1,13 +1,16 @@
 // Sidebar.tsx
-import { useState } from "react";
-import { Home, Users, Upload, MessageSquare, Calendar, Settings, LifeBuoy, Menu } from "lucide-react";
-import { TbLayoutSidebarLeftCollapse, TbLayoutSidebarRightExpand } from "react-icons/tb";
+import { Home, Users, Upload, MessageSquare, Calendar, Settings, LifeBuoy, ChevronLeft } from "lucide-react";
 import { GoSidebarCollapse } from "react-icons/go";
+import { TbLayoutSidebarLeftCollapse } from "react-icons/tb";
 
-const Sidebar = () => {
-  const [isCollapsed, setIsCollapsed] = useState(false);
-  const [isMobileOpen, setIsMobileOpen] = useState(false);
+interface SidebarProps {
+  isCollapsed: boolean;
+  onCollapse: (collapsed: boolean) => void;
+  isMobileOpen: boolean;
+  onMobileToggle: () => void;
+}
 
+const Sidebar = ({ isCollapsed, onCollapse, isMobileOpen, onMobileToggle }: SidebarProps) => {
   const menuItems = [
     { name: "Dashboard", icon: <Home size={18} />, active: true },
     { name: "My Referrals", icon: <Users size={18} /> },
@@ -17,25 +20,17 @@ const Sidebar = () => {
     { name: "Calendar", icon: <Calendar size={18} /> },
   ];
 
-  const toggleSidebar = () => setIsCollapsed(!isCollapsed);
-  const toggleMobileSidebar = () => setIsMobileOpen(!isMobileOpen);
+  const toggleSidebar = () => {
+    onCollapse(!isCollapsed);
+  };
 
   return (
     <>
-      {/* Mobile Header */}
-      <div className="lg:hidden fixed top-0 left-0 right-0 bg-white shadow-sm z-40 p-4 border-b">
-        <div className="flex items-center justify-between">
-          <button onClick={toggleMobileSidebar} className="p-2 rounded-md hover:bg-gray-100">
-            <Menu size={20} />
-          </button>
-        </div>
-      </div>
-
       {/* Mobile Overlay */}
       {isMobileOpen && (
         <div
           className="lg:hidden fixed inset-0 bg-black bg-opacity-50 z-30"
-          onClick={toggleMobileSidebar}
+          onClick={onMobileToggle}
         />
       )}
 
@@ -54,10 +49,10 @@ const Sidebar = () => {
             <div />
             <button
               onClick={toggleSidebar}
-              className="hidden lg:flex lg:items-center lg:gap-2 p-2 rounded hover:bg-gray-100"
+              className="hidden lg:flex lg:items-center lg:gap-2 p-1.5 rounded hover:bg-gray-100 transition-colors"
             >
-              {!isCollapsed && <span className="font-medium text-sm">Collapse</span>}
-              {isCollapsed ? <GoSidebarCollapse size={16}/> : <TbLayoutSidebarLeftCollapse size={16} />}
+               {!isCollapsed && <span className="font-medium text-sm">Collapse</span>}
+              {isCollapsed ? <GoSidebarCollapse size={16} /> : <TbLayoutSidebarLeftCollapse size={16} />}
             </button>
           </div>
 
@@ -100,9 +95,6 @@ const Sidebar = () => {
           </div>
         </div>
       </div>
-
-      {/* Spacer for mobile header */}
-      <div className="lg:hidden h-16" />
     </>
   );
 };

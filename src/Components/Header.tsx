@@ -1,21 +1,30 @@
+import { FiSearch, FiBell, FiMessageSquare, FiHelpCircle, FiMenu } from "react-icons/fi";
+import fortunalogo from '../assets/FortunaLogo-dark.png';
 
-import { FiSearch, FiBell, FiMessageSquare, FiHelpCircle } from "react-icons/fi";
-import fortunalogo from '../assets/FortunaLogo-dark.png'; // adjust the path as necessary
+interface HeaderProps {
+  onMobileToggle: () => void;
+}
 
-const Header = () => {
+const Header = ({ onMobileToggle }: HeaderProps) => {
   return (
-    <header className="w-full bg-white shadow-sm flex items-center justify-between px-6 py-3">
-      {/* Left section - Logo */}
-      <div className="flex items-center space-x-2">
+    <header className="w-full bg-white shadow-sm flex items-center justify-between px-6 py-3 fixed top-0 left-0 z-50">
+      {/* Left section - Logo and Mobile Toggle */}
+      <div className="flex items-center space-x-4">
+        <button
+          onClick={onMobileToggle}
+          className="lg:hidden p-2 rounded-md hover:bg-gray-100"
+        >
+          <FiMenu size={20} />
+        </button>
         <img
-          src={fortunalogo} // replace with your actual logo path
+          src={fortunalogo}
           alt="Fortuna Logo"
           className="h-8 w-auto"
         />
       </div>
 
       {/* Middle section - Search and Invite */}
-      <div className="flex items-center space-x-3 flex-1 justify-center">
+      <div className="hidden md:flex items-center space-x-3 flex-1 justify-center">
         {/* Search Bar */}
         <div className="flex items-center bg-gray-100 rounded-full px-4 py-2 w-[300px]">
           <FiSearch className="text-gray-600 mr-2" />
@@ -33,26 +42,26 @@ const Header = () => {
       </div>
 
       {/* Right section - Icons */}
-      <div className="flex items-center space-x-6">
+      <div className="flex items-center space-x-4 md:space-x-6">
         {/* Help icon */}
-        <div className="relative">
-          <FiHelpCircle className="text-green-900 text-xl" />
+        <div className="hidden sm:block relative">
+          <FiHelpCircle className="text-green-900 text-xl cursor-pointer hover:text-green-700" />
         </div>
 
         {/* Message icon with badge */}
         <div className="relative">
-          <FiMessageSquare className="text-green-900 text-xl" />
+          <FiMessageSquare className="text-green-900 text-xl cursor-pointer hover:text-green-700" />
           <span className="absolute -top-1 -right-1 h-2.5 w-2.5 bg-red-500 rounded-full border border-white"></span>
         </div>
 
         {/* Notification icon with badge */}
         <div className="relative">
-          <FiBell className="text-green-900 text-xl" />
+          <FiBell className="text-green-900 text-xl cursor-pointer hover:text-green-700" />
           <span className="absolute -top-1 -right-1 h-2.5 w-2.5 bg-red-500 rounded-full border border-white"></span>
         </div>
 
         {/* Profile / Status circle */}
-        <div className="h-8 w-8 bg-green-600 text-white flex items-center justify-center rounded-full text-sm font-semibold">
+        <div className="h-8 w-8 bg-green-600 text-white flex items-center justify-center rounded-full text-sm font-semibold cursor-pointer hover:bg-green-700">
           0
         </div>
       </div>
