@@ -1,7 +1,8 @@
 // Sidebar.tsx
-import { Home, Users, Upload, MessageSquare, Calendar, Settings, LifeBuoy, ChevronLeft } from "lucide-react";
+import { Home, Users, Upload, MessageSquare, Calendar, Settings, LifeBuoy } from "lucide-react";
 import { GoSidebarCollapse } from "react-icons/go";
 import { TbLayoutSidebarLeftCollapse } from "react-icons/tb";
+import { useNavigate } from "react-router-dom";
 
 interface SidebarProps {
   isCollapsed: boolean;
@@ -11,13 +12,15 @@ interface SidebarProps {
 }
 
 const Sidebar = ({ isCollapsed, onCollapse, isMobileOpen, onMobileToggle }: SidebarProps) => {
+  const navigate = useNavigate();
+
   const menuItems = [
-    { name: "Dashboard", icon: <Home size={18} />, active: true },
-    { name: "My Referrals", icon: <Users size={18} /> },
-    { name: "Clients", icon: <Users size={18} /> },
-    { name: "Uploads", icon: <Upload size={18} /> },
-    { name: "Messages", icon: <MessageSquare size={18} /> },
-    { name: "Calendar", icon: <Calendar size={18} /> },
+    { name: "Dashboard", icon: <Home size={18} />, path: "/", active: true },
+    { name: "My Referrals", icon: <Users size={18} />, path: "/my-referrals" },
+    { name: "Clients", icon: <Users size={18} />, path: "/clients" },
+    { name: "Uploads", icon: <Upload size={18} />, path: "/uploads" },
+    { name: "Messages", icon: <MessageSquare size={18} />, path: "/messages" },
+    { name: "Calendar", icon: <Calendar size={18} />, path: "/calendar" },
   ];
 
   const toggleSidebar = () => {
@@ -37,22 +40,22 @@ const Sidebar = ({ isCollapsed, onCollapse, isMobileOpen, onMobileToggle }: Side
       {/* Sidebar */}
       <div
         className={`
-          fixed top-16 left-0 h-[calc(100vh-4rem)] bg-white shadow-md flex flex-col justify-between z-30
+          fixed top-14 left-0 h-[calc(100vh-3.5rem)] bg-white shadow-md flex flex-col justify-between z-30
           transition-all duration-300 ease-in-out
-          ${isCollapsed ? "w-16" : "w-64"}
+          ${isCollapsed ? "w-16" : "w-56"}
           ${isMobileOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"}
         `}
       >
         {/* Sidebar Header */}
         <div className="flex-1 flex flex-col">
-          <div className="flex items-center justify-between p-4 border-b">
+          <div className="flex items-center justify-between p-4 border-b border-gray-200">
             <div />
             <button
               onClick={toggleSidebar}
               className="hidden lg:flex lg:items-center lg:gap-2 p-1.5 rounded hover:bg-gray-100 transition-colors"
             >
-               {!isCollapsed && <span className="font-medium text-sm">Collapse</span>}
-              {isCollapsed ? <GoSidebarCollapse size={16} /> : <TbLayoutSidebarLeftCollapse size={16} />}
+              {!isCollapsed && <span className="font-medium text-sm">Collapse</span>}
+              {isCollapsed ? <GoSidebarCollapse size={20} /> : <TbLayoutSidebarLeftCollapse size={16} />}
             </button>
           </div>
 
@@ -61,10 +64,14 @@ const Sidebar = ({ isCollapsed, onCollapse, isMobileOpen, onMobileToggle }: Side
             {menuItems.map((item) => (
               <li
                 key={item.name}
+                onClick={() => navigate(item.path)}
                 className={`
-                  flex items-center gap-3 px-6 py-3 cursor-pointer transition-colors
-                  hover:bg-green-50 hover:text-green-600
-                  ${item.active ? "bg-green-100 text-green-600 border-r-2 border-green-600" : "text-gray-600"}
+                  flex items-center gap-3 transition-colors
+                  hover:bg-green-50 py-2 px-3 mx-2 my-3
+                  ${item.active 
+                    ? "bg-gradient-to-r from-[#0479bf] via-[#39988b] to-[#7ec247] text-white rounded-md"
+                    : "text-gray-600 cursor-pointer"
+                  }
                   ${isCollapsed ? "justify-center px-3" : ""}
                 `}
               >
@@ -76,7 +83,7 @@ const Sidebar = ({ isCollapsed, onCollapse, isMobileOpen, onMobileToggle }: Side
         </div>
 
         {/* Footer */}
-        <div className="border-t">
+        <div>
           <div
             className={`flex items-center gap-3 px-6 py-3 cursor-pointer text-gray-600 transition-colors hover:bg-green-50 hover:text-green-600 ${
               isCollapsed ? "justify-center px-3" : ""
