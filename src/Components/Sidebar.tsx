@@ -17,9 +17,24 @@ const Sidebar = ({ isCollapsed, onCollapse, isMobileOpen, onMobileToggle }: Side
 
   const toggleSidebar = () => onCollapse(!isCollapsed);
 
-  // ✅ Helper: check if route is active (exact or child)
-  const isRouteActive = (path: string) =>
-    location.pathname === path || location.pathname.startsWith(`${path}/`);
+  const isRouteActive = (path: string) => {
+    const current = location.pathname;
+  
+    // ✅ Exact match or subpath
+    if (current === path || current.startsWith(`${path}/`)) return true;
+  
+    // ✅ Handle dynamic path like /client/:clientName
+    if (path.includes(":")) {
+      const base = path.split("/:")[0];
+      return current.startsWith(base);
+    }
+  
+    // ✅ Handle singular/plural case (e.g., /clients → /client/:id)
+    if (path === "/clients" && current.startsWith("/client/")) return true;
+  
+    return false;
+  };
+  
 
   return (
     <>

@@ -18,7 +18,7 @@ const ClientDetails: React.FC = () => {
             <div className="p-6 text-center text-gray-600">
                 Client not found.
                 <button
-                    onClick={() => navigate("/")}
+                    onClick={() => navigate(-1)}
                     className="ml-2 text-blue-600 underline"
                 >
                     Go back
