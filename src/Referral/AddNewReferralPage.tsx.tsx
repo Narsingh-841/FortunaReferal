@@ -50,7 +50,7 @@ const AddNewReferralPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white p-6">
       <div>
         <form onSubmit={handleSubmit} className="space-y-10">
           {/* Referrer Details */}

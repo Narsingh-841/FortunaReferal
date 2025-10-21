@@ -66,6 +66,17 @@ const ClientList: React.FC = () => {
     const [selectedService, setSelectedService] = useState<string | null>(null);
     const navigate = useNavigate();
 
+     React.useEffect(() => {
+        if (showDate || showService) {
+            document.body.style.overflow = "hidden";
+        } else {
+            document.body.style.overflow = "";
+        }
+        return () => {
+            document.body.style.overflow = "";
+        };
+    }, [showDate, showService]);
+
     const services = [
         "All Services",
         "Accounting",
@@ -132,7 +143,7 @@ const ClientList: React.FC = () => {
                                         className="fixed inset-0 bg-black/20 z-40"
                                         onClick={handleCloseCalendar}
                                     />
-                                    <div className="absolute top-12 left-0 bg-white shadow-lg rounded-xl border p-2 z-50">
+                                    <div className="absolute top-12 left-0 sm:-left-24 bg-white shadow-lg rounded-xl border p-2 z-50">
                                         <Calendar
                                             onChange={(date) =>
                                                 handleDateChange(date as Date)
@@ -158,7 +169,7 @@ const ClientList: React.FC = () => {
                                         className="fixed inset-0 bg-black/20 z-40"
                                         onClick={handleCloseService}
                                     />
-                                    <div className="absolute top-12 left-24 bg-white shadow-lg rounded-md border p-2 z-50 min-w-[160px]">
+                                    <div className="absolute top-12 left-0 sm:-left-18 bg-white shadow-lg rounded-md border p-2 z-50 min-w-[160px]">
                                         <div className="space-y-1">
                                             {services.map((service) => (
                                                 <button
