@@ -38,7 +38,7 @@ export default function ServicesDashboard() {
   };
 
   return (
-    <div>
+    <div className="p-6">
       <h1 className="text-2xl font-semibold mb-6">Services</h1>
 
       <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>

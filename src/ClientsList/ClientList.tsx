@@ -93,7 +93,7 @@ const ClientList: React.FC = () => {
     };
 
     return (
-        <div className="w-full bg-white rounded-lg">
+        <div className="w-full p-6 bg-white rounded-lg">
             {/* Header Section */}
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 mb-4">
                 <h2 className="text-lg sm:text-xl font-semibold text-[#1A1A1A]">
