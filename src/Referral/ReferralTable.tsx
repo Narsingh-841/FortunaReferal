@@ -64,6 +64,17 @@ const ReferralTable: React.FC = () => {
     const [selectedDate, setSelectedDate] = useState<Date | null>(null);
     const navigate = useNavigate();
 
+     React.useEffect(() => {
+        if (showDate) {
+            document.body.style.overflow = "hidden";
+        } else {
+            document.body.style.overflow = "";
+        }
+        return () => {
+            document.body.style.overflow = "";
+        };
+    }, [showDate]);
+
     const handleDateChange = (date: Date) => {
         setSelectedDate(date);
         setshowDate(false);
