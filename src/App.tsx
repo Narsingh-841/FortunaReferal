@@ -7,6 +7,7 @@ import AddNewReferralPage from "./Referral/AddNewReferralPage.tsx";
 import ClientList from "./ClientsList/ClientList.tsx";
 import FilesPage from "./Uploads/FilesPage.tsx";
 import CalendarPage from "./Calender/CalendarPage.tsx";
+import ClientDetails from "./ClientDetails/ClientDetails.tsx";
 
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
           <Route path="/clients" element={<ClientList />} />
           <Route path="/uploads" element={<FilesPage/>} />
           <Route path="/calendar" element={<CalendarPage/>} />
+          <Route path="/client/:clientName" element={<ClientDetails />} />
           {/* Add more routes here */}
         </Route>
       </Routes>
