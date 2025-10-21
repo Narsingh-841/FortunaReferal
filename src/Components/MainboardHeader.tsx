@@ -22,6 +22,12 @@ const MainboardHeader: React.FC<DashboardHeaderProps> = ({ userName }) => {
   // ✅ Helper: recursively find the menu item that matches the current route
   const findCurrentItem = (items: MenuItem[], path: string): MenuItem | null => {
     for (const item of items) {
+      // ✅ Allow parameterized match like /client/:clientName
+      if (item.path.includes(":")) {
+        const basePath = item.path.split("/:")[0];
+        if (path.startsWith(basePath)) return item;
+      }
+  
       if (item.path === path) return item;
       if (item.children) {
         const foundChild = findCurrentItem(item.children, path);
@@ -30,6 +36,7 @@ const MainboardHeader: React.FC<DashboardHeaderProps> = ({ userName }) => {
     }
     return null;
   };
+  
 
   const currentItem = findCurrentItem(menuItems, location.pathname);
 
@@ -45,7 +52,7 @@ const MainboardHeader: React.FC<DashboardHeaderProps> = ({ userName }) => {
     ? parentItem.name
     : "Dashboard";
 
-  const isDashboard = location.pathname === "/";
+  const isDashboard = location.pathname === "/dashboard";
 
   return (
     <header className="bg-white border-b border-gray-200 px-6 py-4">

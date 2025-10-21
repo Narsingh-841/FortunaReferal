@@ -16,7 +16,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Mainlayout />}>
           {/* Nested routes rendered inside <Outlet /> */}
-          <Route path="/services" element={<ServicesDashboard />} />
+          <Route path="/dashboard" element={<ServicesDashboard />} />
           <Route path="/my-referrals" element={<ReferralTable />} />
           <Route path="/my-referrals/new" element={<AddNewReferralPage />} />
           <Route path="/clients" element={<ClientList />} />
