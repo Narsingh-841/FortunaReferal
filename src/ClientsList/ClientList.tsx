@@ -66,7 +66,13 @@ const ClientList: React.FC = () => {
     const [selectedService, setSelectedService] = useState<string | null>(null);
     const navigate = useNavigate();
 
-    const services = ["All Services", "Accounting", "Insurance", "Tax", "Consulting"];
+    const services = [
+        "All Services",
+        "Accounting",
+        "Insurance",
+        "Tax",
+        "Consulting",
+    ];
 
     const handleDateChange = (date: Date) => {
         setSelectedDate(date);
@@ -119,17 +125,18 @@ const ClientList: React.FC = () => {
                                 <span>Date</span>
                             </button>
 
-                            
                             {/* Calendar Dropdown */}
                             {showDate && (
                                 <>
-                                    <div 
+                                    <div
                                         className="fixed inset-0 bg-black/20 z-40"
                                         onClick={handleCloseCalendar}
                                     />
                                     <div className="absolute top-12 left-0 bg-white shadow-lg rounded-xl border p-2 z-50">
                                         <Calendar
-                                            onChange={(date) => handleDateChange(date as Date)}
+                                            onChange={(date) =>
+                                                handleDateChange(date as Date)
+                                            }
                                             value={selectedDate}
                                         />
                                         <div className="flex justify-end mt-2">
@@ -147,7 +154,7 @@ const ClientList: React.FC = () => {
                             {/* Service Dropdown */}
                             {showService && (
                                 <>
-                                    <div 
+                                    <div
                                         className="fixed inset-0 bg-black/20 z-40"
                                         onClick={handleCloseService}
                                     />
@@ -156,9 +163,16 @@ const ClientList: React.FC = () => {
                                             {services.map((service) => (
                                                 <button
                                                     key={service}
-                                                    onClick={() => handleServiceSelect(service)}
+                                                    onClick={() =>
+                                                        handleServiceSelect(
+                                                            service
+                                                        )
+                                                    }
                                                     className={`block w-full text-left px-3 py-2 text-sm rounded hover:bg-gray-100 ${
-                                                        selectedService === service ? 'bg-blue-50 text-blue-600' : 'text-gray-700'
+                                                        selectedService ===
+                                                        service
+                                                            ? "bg-blue-50 text-blue-600"
+                                                            : "text-gray-700"
                                                     }`}
                                                 >
                                                     {service}
@@ -200,12 +214,21 @@ const ClientList: React.FC = () => {
                         {data.map((row, i) => (
                             <tr
                                 key={i}
-                                className={`text-sm border-none ${
+                                onClick={() =>
+                                    navigate(
+                                        `/client/${row.referralName.toLowerCase()}`
+                                    )
+                                }
+                                className={`cursor-pointer text-sm border-none ${
                                     i % 2 === 0 ? "bg-white" : "bg-[#f2f8ec]"
-                                } border-t`}
+                                } hover:bg-gray-100 transition-colors`}
                             >
-                                <td className="px-4 py-3">{row.referralName}</td>
-                                <td className="px-4 py-3">{row.referrerName}</td>
+                                <td className="px-4 py-3">
+                                    {row.referralName}
+                                </td>
+                                <td className="px-4 py-3">
+                                    {row.referrerName}
+                                </td>
                                 <td className="px-4 py-3">{row.email}</td>
                                 <td className="px-4 py-3">{row.date}</td>
                                 <td className="px-4 py-3">{row.phone}</td>
@@ -239,13 +262,24 @@ const ClientList: React.FC = () => {
                         {data.map((row, i) => (
                             <tr
                                 key={i}
-                                className={`${
+                                onClick={() =>
+                                    navigate(
+                                        `/client/${row.referralName.toLowerCase()}`
+                                    )
+                                }
+                                className={`cursor-pointer ${
                                     i % 2 === 0 ? "bg-white" : "bg-[#f2f8ec]"
-                                } border-t`}
+                                } hover:bg-gray-100 transition-colors border-t`}
                             >
-                                <td className="px-3 py-2">{row.referralName}</td>
-                                <td className="px-3 py-2">{row.referrerName}</td>
-                                <td className="px-3 py-2 truncate max-w-[120px]">{row.email}</td>
+                                <td className="px-3 py-2">
+                                    {row.referralName}
+                                </td>
+                                <td className="px-3 py-2">
+                                    {row.referrerName}
+                                </td>
+                                <td className="px-3 py-2 truncate max-w-[120px]">
+                                    {row.email}
+                                </td>
                                 <td className="px-3 py-2">{row.date}</td>
                                 <td className="px-3 py-2">{row.service}</td>
                                 <td className="px-3 py-2">
@@ -263,11 +297,12 @@ const ClientList: React.FC = () => {
             <div className="block md:hidden space-y-3">
                 {data.map((row, i) => (
                     <div
-                        key={i}
-                        className={`border rounded-lg p-4 ${
-                            i % 2 === 0 ? "bg-white" : "bg-[#f2f8ec]"
-                        }`}
-                    >
+  key={i}
+  onClick={() => navigate(`/client/${row.referralName.toLowerCase()}`)}
+  className={`cursor-pointer border rounded-lg p-4 ${
+    i % 2 === 0 ? "bg-white" : "bg-[#f2f8ec]"
+  } hover:bg-gray-100 transition-colors`}
+>
                         <div className="grid grid-cols-2 gap-3 text-sm">
                             <div>
                                 <div className="text-xs text-gray-500 font-medium">
