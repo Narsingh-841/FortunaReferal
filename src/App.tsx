@@ -5,6 +5,7 @@ import Mainlayout from "./Layout/Mianlayout";
 import ReferralTable from "./Referral/ReferralTable";
 import AddNewReferralPage from "./Referral/AddNewReferralPage.tsx";
 import ClientList from "./ClientsList/ClientList.tsx";
+import ClientDetails from "./ClientDetails/ClientDetails.tsx";
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
           <Route path="/my-referrals" element={<ReferralTable />} />
           <Route path="/my-referrals/new" element={<AddNewReferralPage />} />
           <Route path="/clients" element={<ClientList />} />
+          <Route path="/client/:clientName" element={<ClientDetails />} />
           {/* Add more routes here */}
         </Route>
       </Routes>
