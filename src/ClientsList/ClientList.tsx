@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
-import { LuCalendar } from "react-icons/lu";
-import "./CalendarCustom.css";
-import { useNavigate,} from "react-router-dom";
+import { LuCalendar, LuChevronDown } from "react-icons/lu";
+import "../Referral/CalendarCustom.css";
+import { useNavigate } from "react-router-dom";
 
 interface Row {
     referrerName: string;
@@ -59,23 +59,33 @@ const data: Row[] = [
     },
 ];
 
-const ReferralTable: React.FC = () => {
-    const [showDate, setshowDate] = useState(false);
+const ClientList: React.FC = () => {
+    const [showDate, setShowDate] = useState(false);
+    const [showService, setShowService] = useState(false);
     const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+    const [selectedService, setSelectedService] = useState<string | null>(null);
     const navigate = useNavigate();
+
+    const services = ["All Services", "Accounting", "Insurance", "Tax", "Consulting"];
 
     const handleDateChange = (date: Date) => {
         setSelectedDate(date);
-        setshowDate(false);
+        setShowDate(false);
+    };
+
+    const handleServiceSelect = (service: string) => {
+        setSelectedService(service);
+        setShowService(false);
     };
 
     const handleCloseCalendar = () => {
-        setshowDate(false);
+        setShowDate(false);
     };
-  const handleAddNewClick = () => {
-        // Navigate to the add new referral page
-        navigate('/my-referrals/new');
+
+    const handleCloseService = () => {
+        setShowService(false);
     };
+
     return (
         <div className="w-full bg-white rounded-lg">
             {/* Header Section */}
@@ -86,39 +96,78 @@ const ReferralTable: React.FC = () => {
                 <div className="flex flex-col xs:flex-row items-stretch xs:items-center gap-2 w-full sm:w-auto relative">
                     <div className="flex justify-between items-center mb-3">
                         <div className="flex items-center gap-3 relative">
+                            {/* Service Button */}
                             <button
-                                onClick={() => setshowDate(!showDate)}
+                                onClick={() => {
+                                    setShowService(!showService);
+                                    setShowDate(false);
+                                }}
+                                className="flex items-center gap-2 border rounded-full px-3 py-1.5 text-sm text-black bg-white hover:bg-gray-50 border-gray-200 cursor-pointer"
+                            >
+                                <span>Service</span>
+                                <LuChevronDown />
+                            </button>
+                            {/* Date Button */}
+                            <button
+                                onClick={() => {
+                                    setShowDate(!showDate);
+                                    setShowService(false);
+                                }}
                                 className="flex items-center gap-2 border rounded-full px-3 py-1.5 text-sm text-black bg-white hover:bg-gray-50 border-gray-200 cursor-pointer"
                             >
                                 <LuCalendar />
                                 <span>Date</span>
                             </button>
-                            <button 
-                             onClick={handleAddNewClick}
-                            className="rounded-md px-4 py-1.5 font-medium text-sm border  cursor-pointer hover:bg-gray-50">
-                                + Add New
-                            </button>
+
                             
                             {/* Calendar Dropdown */}
                             {showDate && (
                                 <>
-                                    {/* Background Overlay */}
                                     <div 
                                         className="fixed inset-0 bg-black/20 z-40"
                                         onClick={handleCloseCalendar}
                                     />
-                                    
-                                    {/* Calendar Container */}
-                                    <div className="absolute top-12 left-0 sm:-left-24 bg-white shadow-lg rounded-xl border p-2 z-50">
+                                    <div className="absolute top-12 left-0 bg-white shadow-lg rounded-xl border p-2 z-50">
                                         <Calendar
-                                            onChange={(date) =>
-                                                handleDateChange(date as Date)
-                                            }
+                                            onChange={(date) => handleDateChange(date as Date)}
                                             value={selectedDate}
                                         />
                                         <div className="flex justify-end mt-2">
                                             <button
                                                 onClick={handleCloseCalendar}
+                                                className="px-3 py-1 text-sm bg-gray-200 rounded-md hover:bg-gray-300"
+                                            >
+                                                Close
+                                            </button>
+                                        </div>
+                                    </div>
+                                </>
+                            )}
+
+                            {/* Service Dropdown */}
+                            {showService && (
+                                <>
+                                    <div 
+                                        className="fixed inset-0 bg-black/20 z-40"
+                                        onClick={handleCloseService}
+                                    />
+                                    <div className="absolute top-12 left-24 bg-white shadow-lg rounded-md border p-2 z-50 min-w-[160px]">
+                                        <div className="space-y-1">
+                                            {services.map((service) => (
+                                                <button
+                                                    key={service}
+                                                    onClick={() => handleServiceSelect(service)}
+                                                    className={`block w-full text-left px-3 py-2 text-sm rounded hover:bg-gray-100 ${
+                                                        selectedService === service ? 'bg-blue-50 text-blue-600' : 'text-gray-700'
+                                                    }`}
+                                                >
+                                                    {service}
+                                                </button>
+                                            ))}
+                                        </div>
+                                        <div className="flex justify-end mt-2 pt-2 border-t">
+                                            <button
+                                                onClick={handleCloseService}
                                                 className="px-3 py-1 text-sm bg-gray-200 rounded-md hover:bg-gray-300"
                                             >
                                                 Close
@@ -137,8 +186,8 @@ const ReferralTable: React.FC = () => {
                 <table className="min-w-full border-collapse">
                     <thead className="bg-white">
                         <tr className="text-left text-sm font-semibold border-b border-gray-200 text-black">
-                            <th className="px-4 py-3">Referrer Name</th>
-                            <th className="px-4 py-3">Referral Name</th>
+                            <th className="px-4 py-3">Client Name</th>
+                            <th className="px-4 py-3">Referral by</th>
                             <th className="px-4 py-3">Email</th>
                             <th className="px-4 py-3">Date</th>
                             <th className="px-4 py-3">Phone No.</th>
@@ -155,12 +204,8 @@ const ReferralTable: React.FC = () => {
                                     i % 2 === 0 ? "bg-white" : "bg-[#f2f8ec]"
                                 } border-t`}
                             >
-                                <td className="px-4 py-3">
-                                    {row.referrerName}
-                                </td>
-                                <td className="px-4 py-3">
-                                    {row.referralName}
-                                </td>
+                                <td className="px-4 py-3">{row.referralName}</td>
+                                <td className="px-4 py-3">{row.referrerName}</td>
                                 <td className="px-4 py-3">{row.email}</td>
                                 <td className="px-4 py-3">{row.date}</td>
                                 <td className="px-4 py-3">{row.phone}</td>
@@ -182,8 +227,8 @@ const ReferralTable: React.FC = () => {
                 <table className="min-w-full border-collapse text-sm">
                     <thead className="bg-white">
                         <tr className="text-left font-semibold text-black">
-                            <th className="px-3 py-2">Referrer</th>
-                            <th className="px-3 py-2">Referral</th>
+                            <th className="px-3 py-2">Client Name</th>
+                            <th className="px-3 py-2">Referral by</th>
                             <th className="px-3 py-2">Email</th>
                             <th className="px-3 py-2">Date</th>
                             <th className="px-3 py-2">Service</th>
@@ -198,15 +243,9 @@ const ReferralTable: React.FC = () => {
                                     i % 2 === 0 ? "bg-white" : "bg-[#f2f8ec]"
                                 } border-t`}
                             >
-                                <td className="px-3 py-2">
-                                    {row.referrerName}
-                                </td>
-                                <td className="px-3 py-2">
-                                    {row.referralName}
-                                </td>
-                                <td className="px-3 py-2 truncate max-w-[120px]">
-                                    {row.email}
-                                </td>
+                                <td className="px-3 py-2">{row.referralName}</td>
+                                <td className="px-3 py-2">{row.referrerName}</td>
+                                <td className="px-3 py-2 truncate max-w-[120px]">{row.email}</td>
                                 <td className="px-3 py-2">{row.date}</td>
                                 <td className="px-3 py-2">{row.service}</td>
                                 <td className="px-3 py-2">
@@ -232,18 +271,18 @@ const ReferralTable: React.FC = () => {
                         <div className="grid grid-cols-2 gap-3 text-sm">
                             <div>
                                 <div className="text-xs text-gray-500 font-medium">
-                                    Referrer
+                                    Client Name
                                 </div>
                                 <div className="font-medium">
-                                    {row.referrerName}
+                                    {row.referralName}
                                 </div>
                             </div>
                             <div>
                                 <div className="text-xs text-gray-500 font-medium">
-                                    Referral
+                                    Referral by
                                 </div>
                                 <div className="font-medium">
-                                    {row.referralName}
+                                    {row.referrerName}
                                 </div>
                             </div>
                             <div className="col-span-2">
@@ -260,7 +299,7 @@ const ReferralTable: React.FC = () => {
                             </div>
                             <div>
                                 <div className="text-xs text-gray-500 font-medium">
-                                    Phone
+                                    Phone No.
                                 </div>
                                 <div>{row.phone}</div>
                             </div>
@@ -292,4 +331,4 @@ const ReferralTable: React.FC = () => {
     );
 };
 
-export default ReferralTable;
+export default ClientList;
