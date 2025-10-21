@@ -1,8 +1,8 @@
-// Sidebar.tsx
-import { Home, Users, Upload, MessageSquare, Calendar, Settings, LifeBuoy } from "lucide-react";
+import { Settings, LifeBuoy } from "lucide-react";
 import { GoSidebarCollapse } from "react-icons/go";
 import { TbLayoutSidebarLeftCollapse } from "react-icons/tb";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
+import { menuItems } from "./menuConfig";
 
 interface SidebarProps {
   isCollapsed: boolean;
@@ -13,15 +13,7 @@ interface SidebarProps {
 
 const Sidebar = ({ isCollapsed, onCollapse, isMobileOpen, onMobileToggle }: SidebarProps) => {
   const navigate = useNavigate();
-
-  const menuItems = [
-    { name: "Dashboard", icon: <Home size={18} />, path: "/", active: true },
-    { name: "My Referrals", icon: <Users size={18} />, path: "/my-referrals" },
-    { name: "Clients", icon: <Users size={18} />, path: "/clients" },
-    { name: "Uploads", icon: <Upload size={18} />, path: "/uploads" },
-    { name: "Messages", icon: <MessageSquare size={18} />, path: "/messages" },
-    { name: "Calendar", icon: <Calendar size={18} />, path: "/calendar" },
-  ];
+  const location = useLocation();
 
   const toggleSidebar = () => {
     onCollapse(!isCollapsed);
@@ -61,24 +53,27 @@ const Sidebar = ({ isCollapsed, onCollapse, isMobileOpen, onMobileToggle }: Side
 
           {/* Navigation Items */}
           <ul className="mt-4 flex-1">
-            {menuItems.map((item) => (
-              <li
-                key={item.name}
-                onClick={() => navigate(item.path)}
-                className={`
-                  flex items-center gap-3 transition-colors
-                  hover:bg-green-50 py-2 px-3 mx-2 my-3
-                  ${item.active 
-                    ? "bg-gradient-to-r from-[#0479bf] via-[#39988b] to-[#7ec247] text-white rounded-md"
-                    : "text-gray-600 cursor-pointer"
-                  }
-                  ${isCollapsed ? "justify-center px-3" : ""}
-                `}
-              >
-                {item.icon}
-                {!isCollapsed && <span className="font-medium">{item.name}</span>}
-              </li>
-            ))}
+            {menuItems.map((item) => {
+              const isActive = location.pathname === item.path;
+              const Icon = item.icon;
+              return (
+                <li
+                  key={item.name}
+                  onClick={() => navigate(item.path)}
+                  className={`
+                    flex items-center gap-3 transition-colors
+                    hover:bg-green-50 py-2 px-3 mx-2 my-3 rounded-md
+                    ${isActive
+                      ? "bg-gradient-to-r from-[#0479bf] via-[#39988b] to-[#7ec247] text-white"
+                      : "text-gray-600 cursor-pointer"}
+                    ${isCollapsed ? "justify-center px-3" : ""}
+                  `}
+                >
+                  <Icon size={18} />
+                  {!isCollapsed && <span className="font-medium">{item.name}</span>}
+                </li>
+              );
+            })}
           </ul>
         </div>
 
