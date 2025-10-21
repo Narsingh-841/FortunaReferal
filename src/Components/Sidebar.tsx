@@ -15,9 +15,11 @@ const Sidebar = ({ isCollapsed, onCollapse, isMobileOpen, onMobileToggle }: Side
   const navigate = useNavigate();
   const location = useLocation();
 
-  const toggleSidebar = () => {
-    onCollapse(!isCollapsed);
-  };
+  const toggleSidebar = () => onCollapse(!isCollapsed);
+
+  // ✅ Helper: check if route is active (exact or child)
+  const isRouteActive = (path: string) =>
+    location.pathname === path || location.pathname.startsWith(`${path}/`);
 
   return (
     <>
@@ -32,8 +34,8 @@ const Sidebar = ({ isCollapsed, onCollapse, isMobileOpen, onMobileToggle }: Side
       {/* Sidebar */}
       <div
         className={`
-          fixed top-14 left-0 h-[calc(100vh-3.5rem)] bg-white border-r border-gray-200 flex flex-col justify-between z-30
-          transition-all duration-300 ease-in-out
+          fixed top-14 left-0 h-[calc(100vh-3.5rem)] bg-white border-r border-gray-200 
+          flex flex-col justify-between z-30 transition-all duration-300 ease-in-out
           ${isCollapsed ? "w-16" : "w-56"}
           ${isMobileOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"}
         `}
@@ -54,7 +56,7 @@ const Sidebar = ({ isCollapsed, onCollapse, isMobileOpen, onMobileToggle }: Side
           {/* Navigation Items */}
           <ul className="mt-4 flex-1">
             {menuItems.map((item) => {
-              const isActive = location.pathname === item.path;
+              const active = isRouteActive(item.path);
               const Icon = item.icon;
               return (
                 <li
@@ -63,7 +65,7 @@ const Sidebar = ({ isCollapsed, onCollapse, isMobileOpen, onMobileToggle }: Side
                   className={`
                     flex items-center gap-3 transition-colors
                     hover:bg-green-50 py-2 px-3 mx-2 my-3 rounded-md
-                    ${isActive
+                    ${active
                       ? "bg-gradient-to-r from-[#0479bf] via-[#39988b] to-[#7ec247] text-white"
                       : "text-gray-600 cursor-pointer"}
                     ${isCollapsed ? "justify-center px-3" : ""}

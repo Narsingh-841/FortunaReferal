@@ -1,1 +1,14 @@
 @import "tailwindcss";
+
+/* Remove border from the flag selector */
+.react-international-phone-country-selector-button {
+  border: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+}
+
+/* Optional: remove focus outline on flag button */
+.react-international-phone-country-selector-button:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
