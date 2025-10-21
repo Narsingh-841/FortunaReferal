@@ -23,6 +23,7 @@ const MainboardHeader: React.FC<DashboardHeaderProps> = ({ userName }) => {
       <div className="flex items-center space-x-4">
         {/* Back button for non-dashboard pages */}
       
+        {!isDashboard && (
           <button
             onClick={() => navigate(-1)}
             className="p-1.5 rounded hover:bg-gray-100 transition-colors leading-none flex items-center justify-center"
@@ -30,6 +31,7 @@ const MainboardHeader: React.FC<DashboardHeaderProps> = ({ userName }) => {
           >
             <ArrowLeft size={20} strokeWidth={2.2} className="text-gray-700" />
           </button>
+        )}
   
 
         {/* Dynamic title */}
