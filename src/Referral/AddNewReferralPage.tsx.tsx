@@ -77,7 +77,7 @@ const AddNewReferralPage: React.FC = () => {
               />
 
               {/* International Phone Input */}
-              <div className="w-full rounded-2xl border border-gray-300 px-2 py-1.5 focus-within:ring-1 focus-within:ring-gray-400">
+              <div className="w-full rounded-2xl border border-gray-300 px-4 py-1.5 focus-within:ring-1 focus-within:ring-gray-400">
                 <PhoneInput
                   defaultCountry="au"
                   value={formData.phone}
