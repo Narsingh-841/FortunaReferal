@@ -47,8 +47,8 @@ const Header = ({ onMobileToggle }: HeaderProps) => {
           onClick={() => navigate("/new-client")}
           className={`px-4 py-1.5 rounded-full text-sm font-medium border ${
             isInviteActive
-              ? "bg-green-600 text-white border-green-600 hover:bg-green-700"
-              : "bg-white border-gray-300 text-green-900 hover:bg-gray-50"
+              ? "bg-gradient-to-r from-[#0479bf] via-[#39988b] to-[#7ec247] text-white"
+              : "bg-white border-gray-300 text-green-900 hover:bg-gray-50 cursor-pointer"
           }`}
         >
           + Invite
