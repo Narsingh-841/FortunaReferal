@@ -1,4 +1,3 @@
-// src/Components/menuConfig.tsx
 import { Home, Users, Upload, MessageSquare, Calendar } from "lucide-react";
 
 export const menuItems = [
@@ -14,11 +13,11 @@ export const menuItems = [
     icon: Users,
     path: "/clients",
     children: [
-      { name: "Client View", path: "/client/:clientName" }, // ✅ Add this
+      { name: "Client View", path: "/client/:clientName" },
     ],
   },
   { name: "Uploads", icon: Upload, path: "/uploads" },
   { name: "Messages", icon: MessageSquare, path: "/messages" },
   { name: "Calendar", icon: Calendar, path: "/calendar" },
+  
 ];
-
