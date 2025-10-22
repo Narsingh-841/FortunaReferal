@@ -19,22 +19,16 @@ const Sidebar = ({ isCollapsed, onCollapse, isMobileOpen, onMobileToggle }: Side
 
   const isRouteActive = (path: string) => {
     const current = location.pathname;
-  
-    // ✅ Exact match or subpath
+
     if (current === path || current.startsWith(`${path}/`)) return true;
-  
-    // ✅ Handle dynamic path like /client/:clientName
     if (path.includes(":")) {
       const base = path.split("/:")[0];
       return current.startsWith(base);
     }
-  
-    // ✅ Handle singular/plural case (e.g., /clients → /client/:id)
     if (path === "/clients" && current.startsWith("/client/")) return true;
-  
+
     return false;
   };
-  
 
   return (
     <>
@@ -94,25 +88,31 @@ const Sidebar = ({ isCollapsed, onCollapse, isMobileOpen, onMobileToggle }: Side
           </ul>
         </div>
 
-        {/* Footer */}
-        <div>
-          <div
-            className={`flex items-center gap-3 px-6 py-3 cursor-pointer text-gray-600 transition-colors hover:bg-green-50 hover:text-green-600 ${
-              isCollapsed ? "justify-center px-3" : ""
-            }`}
-            onClick={() => navigate('/support')}
-          >
-            <LifeBuoy size={18} />
-            {!isCollapsed && <span className="font-medium">Support</span>}
-          </div>
-          <div
-            className={`flex items-center gap-3 px-6 py-3 cursor-pointer text-gray-600 transition-colors hover:bg-green-50 hover:text-green-600 ${
-              isCollapsed ? "justify-center px-3" : ""
-            }`}
-          >
-            <Settings size={18} />
-            {!isCollapsed && <span className="font-medium">Settings</span>}
-          </div>
+        {/* Footer - Support & Settings with Active States */}
+        <div className="mb-4">
+          {[
+            { name: "Support", icon: LifeBuoy, path: "/support" },
+            { name: "Settings", icon: Settings, path: "/settings" },
+          ].map((item) => {
+            const active = isRouteActive(item.path);
+            const Icon = item.icon;
+            return (
+              <div
+                key={item.name}
+                onClick={() => navigate(item.path)}
+                className={`
+                  flex items-center gap-3 px-6 py-3 cursor-pointer transition-colors rounded-md mx-2 my-2
+                  ${active
+                    ? "bg-gradient-to-r from-[#0479bf] via-[#39988b] to-[#7ec247] text-white"
+                    : "text-gray-600 hover:bg-green-50 hover:text-green-600"}
+                  ${isCollapsed ? "justify-center px-3" : ""}
+                `}
+              >
+                <Icon size={18} />
+                {!isCollapsed && <span className="font-medium">{item.name}</span>}
+              </div>
+            );
+          })}
         </div>
       </div>
     </>
