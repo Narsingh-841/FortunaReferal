@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Camera, Edit2 } from 'lucide-react';
+import { PhoneInput } from 'react-international-phone';
+import 'react-international-phone/style.css';
 
 interface ProfileData {
   name: string;
@@ -80,17 +82,21 @@ const ProfilePage: React.FC = () => {
 
             {/* Form Fields */}
             <div className="space-y-5">
+              {/* ✅ International Phone Input */}
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 items-center">
                 <label className="text-gray-700 font-medium text-sm sm:text-base">
                   Phone Number
                 </label>
-                <input
-                  type="tel"
-                  value={isEditing ? editedProfile.phoneNumber : profile.phoneNumber}
-                  onChange={(e) => handleInputChange('phoneNumber', e.target.value)}
-                  disabled={!isEditing}
-                  className="sm:col-span-2 border border-gray-300 rounded-lg px-4 py-2.5 text-sm sm:text-base disabled:bg-white disabled:text-gray-900"
-                />
+                <div className=" col-span-2 w-full rounded-lg border border-gray-300 px-4 py-1.5 focus-within:ring-1 focus-within:ring-gray-400">
+                  <PhoneInput
+                    defaultCountry="au"
+                    value={editedProfile.phoneNumber}
+                    onChange={(phone) => handleInputChange('phoneNumber', phone)}
+                    disabled={!isEditing}
+                    className="[&.react-international-phone-input-container]:bg-white"
+                    inputClassName="w-full !border-0 !ring-0 !shadow-none text-gray-800 placeholder:text-gray-400"
+                  />
+                </div>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 items-center">
