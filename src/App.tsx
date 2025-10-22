@@ -1,7 +1,7 @@
 import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ServicesDashboard from "./ServiceDashboard/ServicesDashboard";
-import Mainlayout from "./Layout/Manlayout.tsx";
+import Mainlayout from "./Layout/Mainlayout.tsx";
 import ReferralTable from "./Referral/ReferralTable";
 import AddNewReferralPage from "./Referral/AddNewReferralPage.tsx";
 import ClientList from "./ClientsList/ClientList.tsx";
