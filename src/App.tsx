@@ -1,7 +1,7 @@
 import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ServicesDashboard from "./ServiceDashboard/ServicesDashboard";
-import Mainlayout from "./Layout/Mianlayout";
+import Mainlayout from "./Layout/Manlayout.tsx";
 import ReferralTable from "./Referral/ReferralTable";
 import AddNewReferralPage from "./Referral/AddNewReferralPage.tsx";
 import ClientList from "./ClientsList/ClientList.tsx";
@@ -12,8 +12,10 @@ import Support from "./Support/Support.tsx";
 import ClientStaffPage from "./ClientStaffPage/ClientStaffPage.tsx";
 import ProfilePage from "./Profile/ProfilePage.tsx";
 import Settings from "./Settings/Settings.tsx";
-import MyServicesSidebar from "./MyServices/MyServicesSidebar.tsx";
+
 import ActivityLog from "./ActivityLog/ActivityLog.tsx";
+import ServicesSubSidebar from "./MyServices/ServicesSubSidebar.tsx";
+import AccountingPage from "./Accounting/Accounting.tsx";
 
 
 function App() {
@@ -35,7 +37,7 @@ function App() {
           <Route path="/settings" element={<Settings />} />
           
           {/* Services routes - rendered in same layout */}
-          <Route path="/services/*" element={<MyServicesSidebar/>} />
+          <Route path="/services/accounting" element={<AccountingPage />} />
           <Route path="/activity-log" element={<ActivityLog />} />
           {/* Add more routes here */}
         </Route>

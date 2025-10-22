@@ -4,7 +4,19 @@ import { GoBook } from "react-icons/go";
 
 export const menuItems = [
   { name: "Dashboard", icon: Home, path: "/dashboard" },
-  {name: "My Services", icon: BsDisc, path: "/services/*"},
+  {
+    name: "My Services", 
+    icon: BsDisc, 
+    path: "/services/accounting",
+    children: [
+      { name: "Accounting", path: "/services/accounting" },
+      { name: "Business Advisory", path: "/services/business-advisory" },
+      { name: "Finance", path: "/services/finance" },
+      { name: "Insurance", path: "/services/insurance" },
+      { name: "IT", path: "/services/it" },
+      { name: "Legal", path: "/services/legal" },
+    ],
+  },
   {
     name: "My Referrals",
     icon: Users,
@@ -25,5 +37,4 @@ export const menuItems = [
   { name: "Uploads", icon: Upload, path: "/uploads" },
   { name: "Messages", icon: MessageSquare, path: "/messages" },
   { name: "Calendar", icon: Calendar, path: "/calendar" },
-  
 ];
