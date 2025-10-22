@@ -13,6 +13,7 @@ import ClientStaffPage from "./ClientStaffPage/ClientStaffPage.tsx";
 import ProfilePage from "./Profile/ProfilePage.tsx";
 import Settings from "./Settings/Settings.tsx";
 import MyServicesSidebar from "./MyServices/MyServicesSidebar.tsx";
+import ActivityLog from "./ActivityLog/ActivityLog.tsx";
 
 
 function App() {
@@ -35,6 +36,8 @@ function App() {
           
           {/* Services routes - rendered in same layout */}
           <Route path="/services/*" element={<MyServicesSidebar/>} />
+          <Route path="/activity-log" element={<ActivityLog />} />
+          {/* Add more routes here */}
         </Route>
       </Routes>
     </BrowserRouter>
