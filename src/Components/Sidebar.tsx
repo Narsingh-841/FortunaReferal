@@ -89,31 +89,36 @@ const Sidebar = ({ isCollapsed, onCollapse, isMobileOpen, onMobileToggle }: Side
         </div>
 
         {/* Footer - Support & Settings with Active States */}
-        <div className="mb-4">
-          {[
-            { name: "Support", icon: LifeBuoy, path: "/support" },
-            { name: "Settings", icon: Settings, path: "/settings" },
-          ].map((item) => {
-            const active = isRouteActive(item.path);
-            const Icon = item.icon;
-            return (
-              <div
-                key={item.name}
-                onClick={() => navigate(item.path)}
-                className={`
-                  flex items-center gap-3 px-6 py-3 cursor-pointer transition-colors rounded-md mx-2 my-2
-                  ${active
-                    ? "bg-gradient-to-r from-[#0479bf] via-[#39988b] to-[#7ec247] text-white"
-                    : "text-gray-600 hover:bg-green-50 hover:text-green-600"}
-                  ${isCollapsed ? "justify-center px-3" : ""}
-                `}
-              >
-                <Icon size={18} />
-                {!isCollapsed && <span className="font-medium">{item.name}</span>}
-              </div>
-            );
-          })}
-        </div>
+       {/* Footer - Support & Settings with Active States */}
+<div className="py-2">
+  <ul>
+    {[
+      { name: "Support", icon: LifeBuoy, path: "/support" },
+      { name: "Settings", icon: Settings, path: "/settings" },
+    ].map((item) => {
+      const active = isRouteActive(item.path);
+      const Icon = item.icon;
+      return (
+        <li
+          key={item.name}
+          onClick={() => navigate(item.path)}
+          className={`
+            flex items-center gap-3 transition-colors py-2 px-3 mx-2 my-1 rounded-md
+            hover:bg-green-50
+            ${active
+              ? "bg-gradient-to-r from-[#0479bf] via-[#39988b] to-[#7ec247] text-white"
+              : "text-gray-600 cursor-pointer"}
+            ${isCollapsed ? "justify-center px-3" : ""}
+          `}
+        >
+          <Icon size={18} className="flex-shrink-0" />
+          {!isCollapsed && <span className="font-medium">{item.name}</span>}
+        </li>
+      );
+    })}
+  </ul>
+</div>
+
       </div>
     </>
   );
