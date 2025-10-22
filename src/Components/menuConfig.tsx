@@ -1,7 +1,9 @@
-import { Home, Users, Upload, MessageSquare, Calendar } from "lucide-react";
+import { Home, Users, Upload, MessageSquare, Calendar, } from "lucide-react";
+import { BsDisc } from "react-icons/bs";
 
 export const menuItems = [
   { name: "Dashboard", icon: Home, path: "/dashboard" },
+  {name: "My Services", icon: BsDisc, path: "/services/*"},
   {
     name: "My Referrals",
     icon: Users,
