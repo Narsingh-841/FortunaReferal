@@ -12,6 +12,7 @@ import Support from "./Support/Support.tsx";
 import ClientStaffPage from "./ClientStaffPage/ClientStaffPage.tsx";
 import ProfilePage from "./Profile/ProfilePage.tsx";
 import Settings from "./Settings/Settings.tsx";
+import ActivityLog from "./ActivityLog/ActivityLog.tsx";
 
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
           <Route path="/new-client" element={<ClientStaffPage />} />
           <Route path="/Profile-Page" element={<ProfilePage/>} />
           <Route path="/settings" element={<Settings />} />
+          <Route path="/activity-log" element={<ActivityLog />} />
           {/* Add more routes here */}
         </Route>
       </Routes>
