@@ -28,22 +28,24 @@ const ClientDetails: React.FC = () => {
     }
 
     // Handle view more / less for documents
-  const handleDocViewMore = () => {
-    if (docLimit >= client.documents.length) {
-      setDocLimit(2);
-    } else {
-      setDocLimit((prev) => Math.min(prev + 5, client.documents.length));
-    }
-  };
+    const handleDocViewMore = () => {
+        if (docLimit >= client.documents.length) {
+            setDocLimit(2);
+        } else {
+            setDocLimit((prev) => Math.min(prev + 5, client.documents.length));
+        }
+    };
 
-  // Handle view more / less for contact history
-  const handleContactViewMore = () => {
-    if (contactLimit >= client.contacts.length) {
-      setContactLimit(2);
-    } else {
-      setContactLimit((prev) => Math.min(prev + 5, client.contacts.length));
-    }
-  };
+    // Handle view more / less for contact history
+    const handleContactViewMore = () => {
+        if (contactLimit >= client.contacts.length) {
+            setContactLimit(2);
+        } else {
+            setContactLimit((prev) =>
+                Math.min(prev + 5, client.contacts.length)
+            );
+        }
+    };
 
     return (
         <div className="bg-white p-6 flex flex-col items-center gap-8">
@@ -70,9 +72,18 @@ const ClientDetails: React.FC = () => {
                         <strong>Assigned Manager</strong> : {client.manager}
                     </p>
                 </div>
-                <div className="w-32 h-32 bg-gray-100 rounded-md flex items-center justify-center text-gray-500">
-                    Image
-                </div>
+
+                {client.image ? (
+                    <img
+                        src={client.image}
+                        alt={client.name}
+                        className="w-32 h-32 rounded-md object-cover border border-gray-200"
+                    />
+                ) : (
+                    <div className="w-32 h-32 bg-gray-100 rounded-md flex items-center justify-center text-gray-500">
+                        Image
+                    </div>
+                )}
             </div>
 
             {/* Service Overview */}
@@ -81,15 +92,9 @@ const ClientDetails: React.FC = () => {
                 <table className="w-full border-collapse text-sm">
                     <thead className="border-b border-gray-200">
                         <tr className="text-left">
-                            <th className="p-2">
-                                Service
-                            </th>
-                            <th className="p-2">
-                                Status
-                            </th>
-                            <th className="p-2">
-                                Last Updated
-                            </th>
+                            <th className="p-2">Service</th>
+                            <th className="p-2">Status</th>
+                            <th className="p-2">Last Updated</th>
                         </tr>
                     </thead>
                     <tbody>

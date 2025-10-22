@@ -100,6 +100,7 @@ const Sidebar = ({ isCollapsed, onCollapse, isMobileOpen, onMobileToggle }: Side
             className={`flex items-center gap-3 px-6 py-3 cursor-pointer text-gray-600 transition-colors hover:bg-green-50 hover:text-green-600 ${
               isCollapsed ? "justify-center px-3" : ""
             }`}
+            onClick={() => navigate('/support')}
           >
             <LifeBuoy size={18} />
             {!isCollapsed && <span className="font-medium">Support</span>}
