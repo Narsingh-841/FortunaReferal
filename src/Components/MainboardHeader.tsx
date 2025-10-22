@@ -23,6 +23,8 @@ const MainboardHeader: React.FC<DashboardHeaderProps> = ({ userName }) => {
     ...menuItems,
     { name: "Support", path: "/support" },
     { name: "Settings", path: "/settings" },
+    {name: "Invite New User",path: "/new-client"},
+    { name: "Profile", path: "/Profile-Page" },
   ];
 
   const findCurrentItem = (items: MenuItem[], path: string): MenuItem | null => {

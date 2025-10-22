@@ -9,6 +9,8 @@ import FilesPage from "./Uploads/FilesPage.tsx";
 import CalendarPage from "./Calender/CalendarPage.tsx";
 import ClientDetails from "./ClientDetails/ClientDetails.tsx";
 import Support from "./Support/Support.tsx";
+import ClientStaffPage from "./ClientStaffPage/ClientStaffPage.tsx";
+import ProfilePage from "./Profile/ProfilePage.tsx";
 
 
 function App() {
@@ -25,6 +27,8 @@ function App() {
           <Route path="/calendar" element={<CalendarPage/>} />
           <Route path="/client/:clientName" element={<ClientDetails />} />
           <Route path="/support" element={<Support />} />
+          <Route path="/new-client" element={<ClientStaffPage />} />
+          <Route path="/Profile-Page" element={<ProfilePage/>} />
           {/* Add more routes here */}
         </Route>
       </Routes>
