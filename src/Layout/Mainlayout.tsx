@@ -9,9 +9,9 @@ import ServicesSubSidebar from "../MyServices/ServicesSubSidebar";
 const Mainlayout = () => {
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
+  const [isServicesSubSidebarOpen, setIsServicesSubSidebarOpen] = useState(false);
   const location = useLocation();
 
-  // Check if we're on a services route
   const isServicesRoute = location.pathname.startsWith('/services');
 
   const handleMobileToggle = () => {
@@ -20,6 +20,14 @@ const Mainlayout = () => {
 
   const handleSidebarCollapse = (collapsed: boolean) => {
     setIsSidebarCollapsed(collapsed);
+  };
+
+  const handleServicesSubSidebarToggle = () => {
+    setIsServicesSubSidebarOpen(!isServicesSubSidebarOpen);
+  };
+
+  const handleServicesSubSidebarClose = () => {
+    setIsServicesSubSidebarOpen(false);
   };
 
   return (
@@ -48,7 +56,11 @@ const Mainlayout = () => {
 
         {/* Services Sub-Sidebar - Only show on services routes */}
         {isServicesRoute && (
-          <ServicesSubSidebar isMainSidebarCollapsed={isSidebarCollapsed} />
+          <ServicesSubSidebar 
+            isMainSidebarCollapsed={isSidebarCollapsed}
+            isMobileOpen={isServicesSubSidebarOpen}
+            onMobileClose={handleServicesSubSidebarClose}
+          />
         )}
         
         {/* Main content area */}
@@ -58,6 +70,18 @@ const Mainlayout = () => {
             : (isServicesRoute ? 'lg:ml-[28rem]' : 'lg:ml-56')
         }`}>
           <MainboardHeader userName="Olivia" />
+          
+          {/* Services Menu Toggle Button - Mobile only */}
+          {isServicesRoute && (
+            <div className="lg:hidden px-4 py-2 bg-white border-b border-gray-200">
+              <button
+                onClick={handleServicesSubSidebarToggle}
+                className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-[#0479bf] via-[#39988b] to-[#7ec247] text-white rounded-md text-sm font-medium"
+              >
+                <span>My Services Menu</span>
+              </button>
+            </div>
+          )}
           
           <main className="flex-1 overflow-y-auto">
             <Outlet />
