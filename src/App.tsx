@@ -11,6 +11,7 @@ import ClientDetails from "./ClientDetails/ClientDetails.tsx";
 import Support from "./Support/Support.tsx";
 import ClientStaffPage from "./ClientStaffPage/ClientStaffPage.tsx";
 import ProfilePage from "./Profile/ProfilePage.tsx";
+import Settings from "./Settings/Settings.tsx";
 
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
           <Route path="/support" element={<Support />} />
           <Route path="/new-client" element={<ClientStaffPage />} />
           <Route path="/Profile-Page" element={<ProfilePage/>} />
+          <Route path="/settings" element={<Settings />} />
           {/* Add more routes here */}
         </Route>
       </Routes>
