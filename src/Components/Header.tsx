@@ -1,11 +1,18 @@
 import { FiSearch, FiBell, FiMessageSquare, FiHelpCircle, FiMenu } from "react-icons/fi";
 import fortunalogo from '../assets/FortunaLogo-dark.png';
+import { useNavigate, useLocation } from "react-router-dom";
 
 interface HeaderProps {
   onMobileToggle: () => void;
 }
 
 const Header = ({ onMobileToggle }: HeaderProps) => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  // Check if current page is /new-client
+  const isInviteActive = location.pathname === "/new-client";
+
   return (
     <header className="w-full bg-white border-b border-gray-200 flex items-center justify-between px-6 py-3 fixed top-0 left-0 z-50">
       {/* Left section - Logo and Mobile Toggle */}
@@ -36,7 +43,14 @@ const Header = ({ onMobileToggle }: HeaderProps) => {
         </div>
 
         {/* Invite Button */}
-        <button className="bg-white border border-gray-300 text-green-900 text-sm font-medium px-4 py-1.5 rounded-full hover:bg-gray-50">
+        <button
+          onClick={() => navigate("/new-client")}
+          className={`px-4 py-1.5 rounded-full text-sm font-medium border ${
+            isInviteActive
+              ? "bg-green-600 text-white border-green-600 hover:bg-green-700"
+              : "bg-white border-gray-300 text-green-900 hover:bg-gray-50"
+          }`}
+        >
           + Invite
         </button>
       </div>
@@ -61,7 +75,10 @@ const Header = ({ onMobileToggle }: HeaderProps) => {
         </div>
 
         {/* Profile / Status circle */}
-        <div className="h-8 w-8 bg-green-600 text-white flex items-center justify-center rounded-full text-sm font-semibold cursor-pointer hover:bg-green-700">
+        <div
+          onClick={() => navigate("/profile-page")}
+          className="h-8 w-8 bg-green-600 text-white flex items-center justify-center rounded-full text-sm font-semibold cursor-pointer hover:bg-green-700"
+        >
           0
         </div>
       </div>
