@@ -2,22 +2,22 @@ import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import { menuItems } from "./menuConfig";
-
+ 
 interface DashboardHeaderProps {
   userName: string;
 }
-
+ 
 interface MenuItem {
   name: string;
   path: string;
   icon?: React.ElementType;
   children?: MenuItem[];
 }
-
+ 
 const MainboardHeader: React.FC<DashboardHeaderProps> = ({ userName }) => {
   const location = useLocation();
   const navigate = useNavigate();
-
+ 
   // Combine main + footer items for title matching
   const allMenuItems: MenuItem[] = [
     ...menuItems,
@@ -26,7 +26,7 @@ const MainboardHeader: React.FC<DashboardHeaderProps> = ({ userName }) => {
     {name: "Invite New User",path: "/new-client"},
     { name: "Profile", path: "/Profile-Page" },
   ];
-
+ 
   const findCurrentItem = (items: MenuItem[], path: string): MenuItem | null => {
     for (const item of items) {
       if (item.path.includes(":")) {
@@ -41,20 +41,20 @@ const MainboardHeader: React.FC<DashboardHeaderProps> = ({ userName }) => {
     }
     return null;
   };
-
+ 
   const currentItem = findCurrentItem(allMenuItems, location.pathname);
   const parentItem = allMenuItems.find((item) =>
     location.pathname.startsWith(`${item.path}/`)
   );
-
+ 
   const currentTitle = currentItem
     ? currentItem.name
     : parentItem
     ? parentItem.name
     : "Dashboard";
-
+ 
   const isDashboard = location.pathname === "/dashboard";
-
+ 
   return (
     <header className="bg-white border-b border-gray-200 px-6 py-4">
       <div className="flex items-center space-x-4">
@@ -67,9 +67,9 @@ const MainboardHeader: React.FC<DashboardHeaderProps> = ({ userName }) => {
             <ArrowLeft size={20} strokeWidth={2.2} className="text-gray-700" />
           </button>
         )}
-
+ 
         <h1 className="text-2xl font-semibold text-black">{currentTitle}</h1>
-
+ 
         {isDashboard && (
           <>
             <div className="h-6 w-px bg-gray-300"></div>
@@ -82,5 +82,5 @@ const MainboardHeader: React.FC<DashboardHeaderProps> = ({ userName }) => {
     </header>
   );
 };
-
+ 
 export default MainboardHeader;

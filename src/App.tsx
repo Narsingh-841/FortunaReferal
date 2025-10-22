@@ -12,6 +12,7 @@ import Support from "./Support/Support.tsx";
 import ClientStaffPage from "./ClientStaffPage/ClientStaffPage.tsx";
 import ProfilePage from "./Profile/ProfilePage.tsx";
 import Settings from "./Settings/Settings.tsx";
+import MyServicesSidebar from "./MyServices/MyServicesSidebar.tsx";
 
 
 function App() {
@@ -19,7 +20,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Mainlayout />}>
-          {/* Nested routes rendered inside <Outlet /> */}
+          {/* Regular dashboard routes */}
           <Route path="/dashboard" element={<ServicesDashboard />} />
           <Route path="/my-referrals" element={<ReferralTable />} />
           <Route path="/my-referrals/new" element={<AddNewReferralPage />} />
@@ -31,7 +32,9 @@ function App() {
           <Route path="/new-client" element={<ClientStaffPage />} />
           <Route path="/Profile-Page" element={<ProfilePage/>} />
           <Route path="/settings" element={<Settings />} />
-          {/* Add more routes here */}
+          
+          {/* Services routes - rendered in same layout */}
+          <Route path="/services/*" element={<MyServicesSidebar/>} />
         </Route>
       </Routes>
     </BrowserRouter>
