@@ -1,4 +1,5 @@
 import { Home, Users, Upload, MessageSquare, Calendar } from "lucide-react";
+import { GoBook } from "react-icons/go";
 
 export const menuItems = [
   { name: "Dashboard", icon: Home, path: "/dashboard" },
@@ -7,6 +8,9 @@ export const menuItems = [
     icon: Users,
     path: "/my-referrals",
     children: [{ name: "Add New", path: "/my-referrals/new" }],
+  },
+  {
+    name: "Activity Log", icon: GoBook, path: "/activity-log"
   },
   {
     name: "Clients",
