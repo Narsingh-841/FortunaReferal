@@ -1,8 +1,11 @@
+import dummy from "../assets/dummy-person.jpg"
+
 export interface Client {
   name: string;
   email: string;
   phone: string;
   joinedOn: string;
+  image?: string
   referralSource: string;
   manager: string;
   services: {
@@ -32,6 +35,7 @@ export const clients: Client[] = [
     phone: "+91 52528 636369",
     joinedOn: "9 May, 25",
     referralSource: "Jane",
+    image: dummy,
     manager: "Elissa",
     services: [
       { service: "Accounting", status: "Bookkeeping", lastUpdated: "05/10/25" },
@@ -74,6 +78,7 @@ export const clients: Client[] = [
     phone: "+91 99999 88888",
     joinedOn: "2 Oct, 25",
     referralSource: "Deepika",
+    image: dummy,
     manager: "Elissa",
     services: [
       { service: "Accounting", status: "Onboarding", lastUpdated: "02/10/25" },
