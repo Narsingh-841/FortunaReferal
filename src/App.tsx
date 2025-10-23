@@ -16,6 +16,10 @@ import Settings from "./Settings/Settings.tsx";
 import ActivityLog from "./ActivityLog/ActivityLog.tsx";
 import AccountingPage from "./ServiceDetailsPage/Accounting/Accounting.tsx";
 import BusinessAdvisory from "./ServiceDetailsPage/BusinessAdvisory/BusinessAdvisory.tsx";
+import Finance from "./ServiceDetailsPage/Finance/finance.tsx";
+import Insurance from "./ServiceDetailsPage/Insurance/Insurance.tsx";
+import IT from "./ServiceDetailsPage/IT/IT.tsx";
+import Legal from "./ServiceDetailsPage/Legal/Legal.tsx";
 
 
 function App() {
@@ -39,6 +43,12 @@ function App() {
           {/* Services routes - rendered in same layout */}
           <Route path="/services/accounting" element={<AccountingPage />} />
           <Route path="/services/business-advisory" element={<BusinessAdvisory />} />
+          <Route path="services/finance" element={<Finance />} />
+          <Route path="/services/insurance" element={<Insurance />} />
+          <Route path="/services/it" element={<IT />} />
+          <Route path="services/legal" element={<Legal />} />
+
+
           <Route path="/activity-log" element={<ActivityLog />} />
           {/* Add more routes here */}
         </Route>
