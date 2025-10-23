@@ -14,8 +14,8 @@ import ProfilePage from "./Profile/ProfilePage.tsx";
 import Settings from "./Settings/Settings.tsx";
 
 import ActivityLog from "./ActivityLog/ActivityLog.tsx";
-import ServicesSubSidebar from "./MyServices/ServicesSubSidebar.tsx";
-import AccountingPage from "./Accounting/Accounting.tsx";
+import AccountingPage from "./ServiceDetailsPage/Accounting/Accounting.tsx";
+import BusinessAdvisory from "./ServiceDetailsPage/BusinessAdvisory/BusinessAdvisory.tsx";
 
 
 function App() {
@@ -38,6 +38,7 @@ function App() {
           
           {/* Services routes - rendered in same layout */}
           <Route path="/services/accounting" element={<AccountingPage />} />
+          <Route path="/services/business-advisory" element={<BusinessAdvisory />} />
           <Route path="/activity-log" element={<ActivityLog />} />
           {/* Add more routes here */}
         </Route>
