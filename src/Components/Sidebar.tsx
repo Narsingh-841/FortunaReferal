@@ -19,16 +19,35 @@ const Sidebar = ({ isCollapsed, onCollapse, isMobileOpen, onMobileToggle }: Side
 
   const isRouteActive = (path: string) => {
     const current = location.pathname;
-
-    if (current === path || current.startsWith(`${path}/`)) return true;
+  
+    // Handle dynamic routes
     if (path.includes(":")) {
       const base = path.split("/:")[0];
-      return current.startsWith(base);
+      if (current.startsWith(base)) return true;
     }
+  
+    // Direct match or subpath
+    if (current === path || current.startsWith(`${path}/`)) return true;
+  
+    // ✅ Special handling for "My Services"
+    if (path.startsWith("/services")) {
+      const servicePaths = [
+        "/services/accounting",
+        "/services/business-advisory",
+        "/services/finance",
+        "/services/insurance",
+        "/services/it",
+        "/services/legal",
+      ];
+      if (servicePaths.some((service) => current.startsWith(service))) return true;
+    }
+  
+    // ✅ Special handling for "Clients"
     if (path === "/clients" && current.startsWith("/client/")) return true;
-
+  
     return false;
   };
+  
 
   return (
     <>
