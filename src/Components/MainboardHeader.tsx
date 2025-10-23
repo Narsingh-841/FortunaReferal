@@ -25,22 +25,27 @@ const MainboardHeader: React.FC<DashboardHeaderProps> = ({ userName }) => {
     { name: "Settings", path: "/settings" },
     {name: "Invite New User",path: "/new-client"},
     { name: "Profile", path: "/Profile-Page" },
+    { name: "Accounting", path: "/services/accounting" },
   ];
  
   const findCurrentItem = (items: MenuItem[], path: string): MenuItem | null => {
     for (const item of items) {
-      if (item.path.includes(":")) {
-        const basePath = item.path.split("/:")[0];
-        if (path.startsWith(basePath)) return item;
-      }
-      if (item.path === path) return item;
+      // Check children first (important!)
       if (item.children) {
         const foundChild = findCurrentItem(item.children, path);
         if (foundChild) return foundChild;
       }
+  
+      if (item.path.includes(":")) {
+        const basePath = item.path.split("/:")[0];
+        if (path.startsWith(basePath)) return item;
+      }
+  
+      if (item.path === path) return item;
     }
     return null;
   };
+  
  
   const currentItem = findCurrentItem(allMenuItems, location.pathname);
   const parentItem = allMenuItems.find((item) =>
