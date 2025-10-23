@@ -1,4 +1,4 @@
-import { MessageSquare, Upload, User, ArrowUpRight, ChevronRight } from "lucide-react";
+import { MessageSquare, Upload, User, ArrowUpRight } from "lucide-react";
 
 const AccountingPage = () => {
   return (
