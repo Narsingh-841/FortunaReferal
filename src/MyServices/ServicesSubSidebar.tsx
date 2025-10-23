@@ -67,7 +67,7 @@ const ServicesSubSidebar = ({
         `}
       >
         {/* Header */}
-        <div className="flex items-center justify-between px-4 py-4 border-b border-gray-200">
+        <div className="flex items-center justify-between px-6 py-4 mt-4 ">
           <h2 className="text-lg font-semibold text-gray-800">My Services</h2>
           
           {/* Close button - only visible on mobile */}
