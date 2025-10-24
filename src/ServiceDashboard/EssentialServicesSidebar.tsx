@@ -35,63 +35,72 @@ const EssentialServicesSidebar = ({
   ];
 
   return (
-    <div
-      className={`relative transition-all duration-500 ease-in-out bg-[#f9faf8] border-l border-gray-200 shadow-lg h-full overflow-y-auto
-      ${isOpen ? "w-80" : "w-0"} `}
-    >
-      {/* Sidebar Content */}
+    <div className="relative h-full">
+      {/* Overlay for mobile */}
+      {isOpen && (
+        <div 
+          className="fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden"
+          onClick={toggleSidebar}
+        />
+      )}
+      
+      {/* Sidebar panel */}
       <div
-        className={`h-full transition-opacity duration-300 ease-in-out ${
-          isOpen ? "opacity-100 p-6" : "opacity-0 p-0"
-        }`}
+        className={`fixed lg:relative top-0 right-0 h-full bg-white max-lg:z-50 transition-all duration-500 ease-in-out border-l border-gray-200 overflow-y-auto
+          ${isOpen ? "w-80 translate-x-0" : "w-80 translate-x-full lg:translate-x-0 lg:w-0"}`}
       >
-        <div className="flex items-center justify-between mb-4">
-          <h2 className="text-lg font-semibold text-gray-900">
-            Essential Services
-          </h2>
-          <button
+        <div
+          className={`h-full transition-opacity duration-300 ease-in-out ${
+            isOpen ? "opacity-100 p-4 lg:p-6" : "opacity-0 p-0"
+          }`}
+        >
+          <div
             onClick={toggleSidebar}
-            className="text-gray-700 hover:text-green-600 transition"
+            className="flex items-center justify-center gap-2 border border-gray-200 py-1.5 rounded-full hover:bg-gray-50 cursor-pointer mb-4"
           >
-            <X size={20} className="font-bold" />
-          </button>
-        </div>
+            <span>Close</span> <X size={18} className="font-bold text-[#91e026]" />
+          </div>
+          
+          <div className="flex items-center justify-between mb-3">
+            <h2 className="text-xl font-bold">Essential Services</h2>          
+          </div>
 
-        <p className="text-sm text-gray-600 mb-6">
-          Our tailored strategies empower your business to thrive in a
-          competitive landscape.
-        </p>
+          <p className="text-sm text-gray-600 mb-3">
+            Our tailored strategies empower your business to thrive in a
+            competitive landscape.
+          </p>
 
-        <div className="flex flex-col gap-4">
-          {services.map((service) => (
-            <div
-              key={service.id}
-              className="border border-gray-200 rounded-xl p-4 bg-white hover:shadow-sm transition"
-            >
-              <div className="flex justify-between items-center mb-1">
-                <span className="text-sm font-semibold text-gray-800">
-                  {service.title}
-                </span>
-                <ArrowUpRight size={16} className="text-green-600" />
+          <div className="flex flex-col gap-4">
+            {services.map((service) => (
+              <div
+                key={service.id}
+                className="border border-gray-200 rounded-xl p-2 bg-white hover:shadow-sm transition"
+              >
+                <div className="flex justify-between items-center mb-1 bg-[#f2f8ec] p-1.5 rounded-sm">
+                  <span className="text-sm font-semibold text-gray-800">
+                    {service.title}
+                  </span>
+                </div>
+                <p className="flex items-center gap-2 text-sm font-medium mb-1">
+                  {service.subService}
+                  <ArrowUpRight size={16} className="text-[#91e026]" />
+                </p>
+                <p className="text-sm text-gray-500">{service.description}</p>
               </div>
-              <p className="text-sm font-medium text-green-700 mb-1">
-                {service.subService}
-              </p>
-              <p className="text-xs text-gray-500">{service.description}</p>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
 
-        <button className="mt-6 w-full text-green-700 font-medium border border-green-600 rounded-lg py-2 hover:bg-green-50 transition">
-          All Services
-        </button>
+          <div className="flex items-center justify-center gap-2 border border-gray-200 py-1.5 rounded-full hover:bg-gray-50 cursor-pointer my-4">
+            <span>All Services</span> <ArrowUpRight size={16} className="text-[#91e026]" />
+          </div>
+        </div>
       </div>
 
-      {/* Floating Button (when closed) */}
+      {/* Floating open button (outside hidden area) */}
       {!isOpen && (
         <button
           onClick={toggleSidebar}
-          className="absolute top-1/2 -left-10 transform -translate-y-1/2 bg-green-600 text-white rounded-l-lg px-3 py-2 shadow-lg hover:bg-green-700 transition"
+          className="absolute top-10 -left-9 transform -translate-y-1/2 bg-green-600 text-white rounded-l-lg px-3 py-2 shadow-lg hover:bg-green-700 transition z-30"
         >
           &lt;
         </button>
