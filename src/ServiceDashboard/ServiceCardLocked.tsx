@@ -1,6 +1,7 @@
 import React from "react";
 import { ArrowUpRight, Check } from "lucide-react";
 import { CiLock } from "react-icons/ci";
+import { useNavigate } from "react-router-dom";
 
 interface ServiceCardLockedProps {
   title: string;
@@ -13,6 +14,8 @@ const ServiceCardLocked: React.FC<ServiceCardLockedProps> = ({
   description,
   subServices,
 }) => {
+  const navigate = useNavigate();
+
   return (
     <div className="w-[260px] rounded-xl border border-gray-200 bg-white shadow-sm flex flex-col justify-between">
       {/* Header */}
@@ -26,7 +29,10 @@ const ServiceCardLocked: React.FC<ServiceCardLockedProps> = ({
       <p className="text-sm text-gray-700 mb-4">{description}</p>
 
       {/* View Button */}
-      <button className="w-fit bg-black text-white font-medium rounded-full px-5 py-2 flex items-center gap-2 transition">
+      <button 
+        className="w-fit bg-black hover:bg-black/80 text-white font-medium rounded-full px-5 py-2 flex items-center gap-2 transition cursor-pointer"
+        onClick={() => navigate("/new-service")}  
+      >
         Explore More <ArrowUpRight className="w-4 h-4 text-[#91e026]" />
       </button>
 

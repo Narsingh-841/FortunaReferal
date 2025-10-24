@@ -20,6 +20,7 @@ import Finance from "./ServiceDetailsPage/Finance/finance.tsx";
 import Insurance from "./ServiceDetailsPage/Insurance/Insurance.tsx";
 import IT from "./ServiceDetailsPage/IT/IT.tsx";
 import Legal from "./ServiceDetailsPage/Legal/Legal.tsx";
+import PersonalDetailsForm from "./PersonalDetailsForm/PersonalDetailsForm.tsx";
 
 
 function App() {
@@ -50,6 +51,7 @@ function App() {
 
 
           <Route path="/activity-log" element={<ActivityLog />} />
+          <Route path="/new-service" element={<PersonalDetailsForm />} />
           {/* Add more routes here */}
         </Route>
       </Routes>
