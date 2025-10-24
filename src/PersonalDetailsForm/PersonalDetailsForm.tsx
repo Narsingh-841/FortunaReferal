@@ -83,7 +83,7 @@ const PersonalDetailsForm: React.FC = () => {
           <Signature
             ref={signatureRef}
             style={{
-              width: "50%",
+              width: "100%",
               height: "160px",
               borderRadius: "0.5rem",
             }}
