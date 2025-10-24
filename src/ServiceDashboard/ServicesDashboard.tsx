@@ -42,7 +42,7 @@ const SortableItem = ({
 // 🧩 Main Dashboard
 export default function ServicesDashboard() {
   const role: string = "client"; // can be "client" or "staff"
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false); // Start closed on mobile
 
   // Data
   const [services, setServices] = useState([
@@ -72,18 +72,17 @@ export default function ServicesDashboard() {
       contactName: "Raj Kumar",
     },
     {
-      id: "IT",
+      id: "SM",
       stage: "On Hold",
       lastContactDate: "Oct 15, 2025",
       contactName: "Raj Kumar",
     },
     {
-      id: "IT",
+      id: "OP",
       stage: "On Hold",
       lastContactDate: "Oct 15, 2025",
       contactName: "Raj Kumar",
     },
-    
   ]);
 
   const lockedServices = [
@@ -123,15 +122,15 @@ export default function ServicesDashboard() {
   };
 
   return (
-    <div className="flex h-full">
+    <div className="flex h-full overflow-hidden"> {/* Added overflow-hidden */}
       {/* Main Content */}
       <div
         className={`flex-1 transition-all duration-500 ease-in-out ${
-          isSidebarOpen ? "mr-0" : "mr-0"
+          isSidebarOpen ? "lg:mr-0" : "mr-0"
         }`}
       >
-        <div className="p-6">
-          <h1 className="text-2xl font-semibold mb-6">Services</h1>
+        <div className="p-4 lg:p-6"> {/* Added responsive padding */}
+          <h1 className="text-xl lg:text-2xl font-semibold mb-6">Services</h1>
 
           <DndContext
             sensors={sensors}
