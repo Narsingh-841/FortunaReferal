@@ -30,7 +30,7 @@ const PersonalDetailsForm: React.FC = () => {
       </h2>
 
       {/* Inputs Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 gap-x-12 mb-6">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 gap-x-12 mb-4 md:mb-6">
         <input
           type="text"
           placeholder="Full Name"
@@ -47,7 +47,7 @@ const PersonalDetailsForm: React.FC = () => {
           className="w-full rounded-2xl border border-gray-300 px-4 py-2.5 focus:outline-none focus:ring-1 focus:ring-gray-400 placeholder:text-gray-400"
         />
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 gap-x-12 mb-6">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 gap-x-12 mb-4 md:mb-6">
         <input
           type="text"
           placeholder="Service Name"
@@ -56,7 +56,7 @@ const PersonalDetailsForm: React.FC = () => {
         <input
           type="text"
           placeholder="Address"
-          className="col-span-2 w-full rounded-2xl border border-gray-300 px-4 py-2.5 focus:outline-none focus:ring-1 focus:ring-gray-400 placeholder:text-gray-400"
+          className="md:col-span-2 w-full rounded-2xl border border-gray-300 px-4 py-2.5 focus:outline-none focus:ring-1 focus:ring-gray-400 placeholder:text-gray-400"
         />
 
       </div>
@@ -69,7 +69,7 @@ const PersonalDetailsForm: React.FC = () => {
         <input
           type="text"
           placeholder="Comments"
-          className="col-span-2 w-full rounded-2xl border border-gray-300 px-4 py-2.5 focus:outline-none focus:ring-1 focus:ring-gray-400 placeholder:text-gray-400"
+          className="md:col-span-2 w-full rounded-2xl border border-gray-300 px-4 py-2.5 focus:outline-none focus:ring-1 focus:ring-gray-400 placeholder:text-gray-400"
         />
       </div>
         
@@ -78,19 +78,20 @@ const PersonalDetailsForm: React.FC = () => {
 
       {/* Signature Section */}
       <div className="mt-6">
-        <label className="font-medium text-gray-800 mb-2 block">
-          Signature
-        </label>
-        <div className="border border-gray-300 rounded-lg bg-white">
+        
+        <div className="w-[270px] border border-gray-300 rounded-lg bg-white">
           <Signature
             ref={signatureRef}
             style={{
-              width: "100%",
-              height: "120px",
+              width: "50%",
+              height: "160px",
               borderRadius: "0.5rem",
             }}
           />
         </div>
+        <label className="font-medium text-gray-800 mb-2 block">
+          Signature
+        </label>
         <div className="flex gap-2 mt-2">
           <button
             type="button"
