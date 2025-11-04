@@ -1,0 +1,172 @@
+import { Settings, LifeBuoy } from "lucide-react";
+import { GoSidebarCollapse } from "react-icons/go";
+import { TbLayoutSidebarLeftCollapse } from "react-icons/tb";
+import { useNavigate, useLocation } from "react-router-dom";
+import { menuItems } from "./menuConfig";
+
+interface SidebarProps {
+  isCollapsed: boolean;
+  onCollapse: (collapsed: boolean) => void;
+  isMobileOpen: boolean;
+  onMobileToggle: () => void;
+}
+
+const Sidebar = ({
+  isCollapsed,
+  onCollapse,
+  isMobileOpen,
+  onMobileToggle,
+}: SidebarProps) => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const toggleSidebar = () => onCollapse(!isCollapsed);
+
+  const handleNavigation = (path: string) => {
+    navigate(path);
+    if (isMobileOpen) onMobileToggle(); // ✅ Close sidebar on mobile after clicking
+  };
+
+  const isRouteActive = (path: string) => {
+    const current = location.pathname;
+
+    // Handle dynamic routes
+    if (path.includes(":")) {
+      const base = path.split("/:")[0];
+      if (current.startsWith(base)) return true;
+    }
+
+    // Direct match or subpath
+    if (current === path || current.startsWith(`${path}/`)) return true;
+
+    // ✅ Special handling for "My Services"
+    if (path.startsWith("/services")) {
+      const servicePaths = [
+        "/services/accounting",
+        "/services/business-advisory",
+        "/services/finance",
+        "/services/insurance",
+        "/services/it",
+        "/services/legal",
+      ];
+      if (servicePaths.some((service) => current.startsWith(service)))
+        return true;
+    }
+
+    // ✅ Special handling for "Clients"
+    if (path === "/clients" && current.startsWith("/client/")) return true;
+
+    return false;
+  };
+
+  return (
+    <>
+      {/* Mobile Overlay */}
+      {isMobileOpen && (
+        <div
+          className="lg:hidden fixed inset-0 bg-black/30 backdrop-blur-sm z-30" // ✅ lighter & soft background
+          onClick={onMobileToggle}
+        />
+      )}
+
+      {/* Sidebar */}
+      <div
+        className={`
+          fixed top-2 lg:top-14 left-0 h-full lg:h-[calc(100vh-3.5rem)] bg-white border-r border-gray-200 
+          flex flex-col justify-between z-30 transition-all duration-300 ease-in-out
+          ${isCollapsed ? "w-16" : "w-56"}
+          ${
+            isMobileOpen
+              ? "translate-x-0"
+              : "-translate-x-full lg:translate-x-0"
+          }
+        `}
+      >
+        {/* Sidebar Header */}
+        <div className="flex-1 flex flex-col">
+          <div className="flex items-center justify-between p-4 border-b border-gray-200">
+            <div />
+            <button
+              onClick={toggleSidebar}
+              className="hidden lg:flex lg:items-center lg:gap-2 p-1.5 rounded hover:bg-gray-100 transition-colors"
+            >
+              {!isCollapsed && (
+                <span className="font-medium text-sm">Collapse</span>
+              )}
+              {isCollapsed ? (
+                <GoSidebarCollapse size={20} />
+              ) : (
+                <TbLayoutSidebarLeftCollapse size={16} />
+              )}
+            </button>
+          </div>
+
+          {/* Navigation Items */}
+          <ul className="mt-4 flex-1">
+            {menuItems.map((item) => {
+              const active = isRouteActive(item.path);
+              const Icon = item.icon;
+              return (
+                <li
+                  key={item.name}
+                  onClick={() => handleNavigation(item.path)} // ✅ Use handleNavigation
+                  className={`
+                    flex items-center gap-3 transition-colors
+                    hover:bg-green-50 py-2 px-3 mx-2 my-3 rounded-md
+                    ${
+                      active
+                        ? "bg-gradient-to-r from-[#0479bf] via-[#39988b] to-[#7ec247] text-white"
+                        : "text-gray-600 cursor-pointer"
+                    }
+                    ${isCollapsed ? "justify-center px-3" : ""}
+                  `}
+                >
+                  <Icon size={18} />
+                  {!isCollapsed && (
+                    <span className="font-medium">{item.name}</span>
+                  )}
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+
+        {/* Footer - Support & Settings */}
+        <div className="py-2">
+          <ul>
+            {[
+              { name: "Support", icon: LifeBuoy, path: "/support" },
+              { name: "Settings", icon: Settings, path: "/settings" },
+            ].map((item) => {
+              const active = isRouteActive(item.path);
+              const Icon = item.icon;
+              return (
+                <li
+                  key={item.name}
+                  onClick={() => handleNavigation(item.path)} // ✅ Use handleNavigation
+                  className={`
+                    flex items-center gap-3 transition-colors py-2 px-3 mx-2 my-1 rounded-md
+                    hover:bg-green-50
+                    ${
+                      active
+                        ? "bg-gradient-to-r from-[#0479bf] via-[#39988b] to-[#7ec247] text-white"
+                        : "text-gray-600 cursor-pointer"
+                    }
+                    ${isCollapsed ? "justify-center px-3" : ""}
+                  `}
+                >
+                  <Icon size={18} className="flex-shrink-0" />
+                  {!isCollapsed && (
+                    <span className="font-medium">{item.name}</span>
+                  )}
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default Sidebar;
