@@ -18,7 +18,6 @@ import ClientServiceCard from "./ClientServiceCard";
 import ServiceCardLocked from "./ServiceCardLocked";
 import EssentialServicesSidebar from "./EssentialServicesSidebar";
 
-// 🧩 Sortable Item
 const SortableItem = ({
   id,
   children,
@@ -41,7 +40,7 @@ const SortableItem = ({
 
 // 🧩 Main Dashboard
 export default function ServicesDashboard() {
-  const role: string = "client"; // can be "client" or "staff"
+  const role: string = "staff"; // can be "client" or "staff"
   const [isSidebarOpen, setIsSidebarOpen] = useState(false); // Start closed on mobile
 
   // Data
